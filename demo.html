@@ -32,9 +32,15 @@
                     }
                 </style>
 
-                <spin-date-time></spin-date-time>
+                <spin-date-time year="{{ year }}" month="{{ month }}" day="{{ day }}"
+                    hour="{{ hour }}" minute="{{ minute }}" second="{{ second }}"
+                    cont="{{ cont }}" ampm="{{ ampm }}" nosec="{{ nosec }}" nomin="{{ nomin }}">
+                </spin-date-time>
 
                 <hr>
+                <label>Continuous
+                    <input type="checkbox" checked="{{ cont }}" />
+                </label>
 
                 <label>AM/PM
                     <input type="checkbox" checked="{{ ampm }}" />
@@ -50,6 +56,9 @@
 
                 <hr>
 
+                <div>year: {{ year }}</div>
+                <div>month: {{ month }}</div>
+                <div>day: {{ day }}</div>
                 <div>hour: {{ hour }}</div>
                 <div>minute: {{ minute }}</div>
                 <div>second: {{ second }}</div>

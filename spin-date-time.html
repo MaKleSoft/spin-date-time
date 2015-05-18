@@ -19,8 +19,10 @@
         }
     </style>
 
-    <spin-date></spin-date>
-    <spin-time></spin-time>
+    <spin-date year="{{ year }}" month="{{ month }}" day="{{ day }}"
+        cont="{{ cont }}" dateFormat="{{ dateFormat }}"></spin-date>
+    <spin-time hour="{{ hour }}" minute="{{ minute }}" second="{{ second }}"
+        ampm="{{ ampm }}" nomin="{{ nomin }}" nosec="{{ nosec }}"></spin-time>
 
 </template>
 
@@ -28,7 +30,34 @@
 (function(Polymer) {
     'use strict';
 
-    Polymer({});
+    Polymer({
+        publish: {
+            year: undefined,
+            month: undefined,
+            day: undefined,
+            hour: undefined,
+            minute: undefined,
+            second: undefined,
+            cont: {
+                value: false,
+                reflect: true
+            },
+            dateFormat: 'LL',
+            ampm: {
+                value: false,
+                reflect: true
+            },
+            nomin: {
+                value: false,
+                reflect: true
+            },
+            nosec: {
+                value: false,
+                reflect: true
+            },
+            step: 5
+        }
+    });
 
 })(Polymer);
 </script>
