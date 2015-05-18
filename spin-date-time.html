@@ -17,6 +17,11 @@
         spin-date, spin-time {
             perspective: none;
         }
+
+        spin-date[cont] /deep/ .option {
+            text-align: left;
+            padding: 0 15px;
+        }
     </style>
 
     <spin-date year="{{ year }}" month="{{ month }}" day="{{ day }}"
