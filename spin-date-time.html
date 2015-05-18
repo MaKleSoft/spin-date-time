@@ -1,0 +1,36 @@
+<!--
+@element spin-date-time
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../spin-date/spin-date.html">
+<link rel="import" href="../spin-time/spin-time.html">
+
+<polymer-element name="spin-date-time" layout horizontal center center-justified>
+
+<template>
+    <style>
+        :host {
+            display: block;
+            perspective: 1000px;
+        }
+
+        spin-date, spin-time {
+            perspective: none;
+        }
+    </style>
+
+    <spin-date></spin-date>
+    <spin-time></spin-time>
+
+</template>
+
+<script>
+(function(Polymer) {
+    'use strict';
+
+    Polymer({});
+
+})(Polymer);
+</script>
+
+</polymer-element>
