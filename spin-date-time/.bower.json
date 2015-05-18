@@ -1,0 +1,34 @@
+{
+  "name": "spin-date-time",
+  "authors": [
+    "Martin Kleinschrodt <martin@maklesoft.com>"
+  ],
+  "main": "spin-date-time.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5",
+    "spin-date": "git@github.com:maklesoft/spin-date.git#~0.2.1",
+    "spin-time": "git@github.com:maklesoft/spin-time.git#~0.1.1"
+  },
+  "devDependencies": {
+    "core-component-page": "Polymer/core-component-page#~0.5.5"
+  },
+  "_release": "18b686e86d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "18b686e86db99810d90143f1cbb6e4148c41e77b"
+  },
+  "_source": "/Users/martin/workspace/polymer-tools/bin/spin-date-time",
+  "_target": "master",
+  "_originalSource": "./",
+  "_direct": true
+}

@@ -1,0 +1,34 @@
+{
+  "name": "spin-time",
+  "version": "0.1.1",
+  "authors": [
+    "Martin Kleinschrodt <martin@maklesoft.com>"
+  ],
+  "main": "spin-time.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5",
+    "spin-select": "git@github.com:maklesoft/spin-select.git#~0.2.1"
+  },
+  "devDependencies": {
+    "core-component-page": "Polymer/core-component-page#~0.5.5"
+  },
+  "homepage": "https://github.com/maklesoft/spin-time",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.1",
+    "commit": "061a0ec9b0806492ac7d2cabf785f5a5de832234"
+  },
+  "_source": "git@github.com:maklesoft/spin-time.git",
+  "_target": "~0.1.1",
+  "_originalSource": "git@github.com:maklesoft/spin-time.git"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "spin-select",
+  "version": "0.2.1",
+  "authors": [
+    "Martin Kleinschrodt <martin@maklesoft.com>"
+  ],
+  "main": "spin-select.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5"
+  },
+  "devDependencies": {
+    "core-component-page": "Polymer/core-component-page#~0.5.5"
+  },
+  "homepage": "https://github.com/maklesoft/spin-select",
+  "_release": "0.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.1",
+    "commit": "e42259f08d20be97a70eab7b3b1b3849c85ad7c5"
+  },
+  "_source": "git@github.com:maklesoft/spin-select.git",
+  "_target": "~0.2.1",
+  "_originalSource": "git@github.com:maklesoft/spin-select.git"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "spin-time",
+  "version": "0.1.0",
+  "authors": [
+    "Martin Kleinschrodt <martin@maklesoft.com>"
+  ],
+  "main": "spin-time.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5",
+    "spin-select": "git@github.com:maklesoft/spin-select.git#~0.2.1"
+  },
+  "devDependencies": {
+    "core-component-page": "Polymer/core-component-page#~0.5.5"
+  }
+}

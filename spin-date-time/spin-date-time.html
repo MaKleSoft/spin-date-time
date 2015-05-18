@@ -1,0 +1,78 @@
+<!--
+@element spin-date-time
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../spin-date/spin-date.html">
+<link rel="import" href="../spin-time/spin-time.html">
+
+<polymer-element name="spin-date-time" layout horizontal center center-justified>
+
+<template>
+    <style>
+        :host {
+            display: block;
+            perspective: 1000px;
+        }
+
+        spin-date, spin-time {
+            perspective: none;
+        }
+
+        spin-date[cont] /deep/ .option {
+            text-align: left;
+            padding: 0 10px;
+        }
+    </style>
+
+    <spin-date id="dateSelect" year="{{ year }}" month="{{ month }}" day="{{ day }}"
+        cont="{{ cont }}" dateFormat="{{ dateFormat }}"></spin-date>
+    <spin-time hour="{{ hour }}" minute="{{ minute }}" second="{{ second }}"
+        ampm="{{ ampm }}" nomin="{{ nomin }}" nosec="{{ nosec }}"></spin-time>
+
+</template>
+
+<script>
+(function(Polymer) {
+    'use strict';
+
+    Polymer({
+        publish: {
+            year: undefined,
+            month: undefined,
+            day: undefined,
+            hour: undefined,
+            minute: undefined,
+            second: undefined,
+            cont: {
+                value: false,
+                reflect: true
+            },
+            dateFormat: 'LL',
+            ampm: {
+                value: false,
+                reflect: true
+            },
+            nomin: {
+                value: false,
+                reflect: true
+            },
+            nosec: {
+                value: false,
+                reflect: true
+            },
+            step: 5
+        },
+
+        getDate: function() {
+            var date = this.$.dateSelect.getDate();
+            date.setHours(this.hour);
+            date.setMinutes(this.minute);
+            date.setSeconds(this.second);
+            return date;
+        }
+    });
+
+})(Polymer);
+</script>
+
+</polymer-element>

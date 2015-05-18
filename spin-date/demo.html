@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>spin-date demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+
+        <script src="../webcomponentsjs/webcomponents.min.js"></script>
+
+        <link rel="import" href="../polymer/polymer.html">
+        <link rel="import" href="spin-date.html">
+
+    </head>
+    <body>
+
+        <polymer-element name="spin-date-demo" layout vertical noscript>
+            <template>
+
+                <style>
+                    :host {
+                        font-family: sans-serif;
+                        padding: 20px;
+                    }
+
+                    :host > div {
+                        padding: 5px;
+                        text-align: center;
+                    }
+
+                    hr {
+                        width: 100%;
+                        margin: 20px 0;
+                    }
+                </style>
+
+                <spin-date year="{{ year }}" month="{{ month }}" day="{{ day }}" cont="{{ cont }}"></spin-date>
+
+                <hr>
+
+                <label>Continuous
+                    <input type="checkbox" checked="{{ cont }}" />
+                </label>
+
+                <hr>
+
+                <div>year: {{ year }}</div>
+                <div>month: {{ month }}</div>
+                <div>day: {{ day }}</div>
+
+            </template>
+        </polymer-element>
+
+        <spin-date-demo fit></spin-date-demo>
+
+    </body>
+</html>

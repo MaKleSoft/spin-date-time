@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>spin-time demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+
+        <script src="../webcomponentsjs/webcomponents.min.js"></script>
+
+        <link rel="import" href="../polymer/polymer.html">
+        <link rel="import" href="spin-time.html">
+
+    </head>
+    <body>
+
+        <polymer-element name="spin-time-demo" layout vertical noscript>
+            <template>
+
+                <style>
+                    :host {
+                        font-family: sans-serif;
+                        padding: 20px;
+                    }
+
+                    :host > div {
+                        padding: 5px;
+                        text-align: center;
+                    }
+
+                    hr {
+                        width: 100%;
+                        margin: 20px 0;
+                    }
+                </style>
+
+                <spin-time hour="{{ hour }}" minute="{{ minute }}" second="{{ second }}"
+                    ampm="{{ ampm }}" nomin="{{ nomin }}" nosec="{{ nosec }}"></spin-time>
+
+                <hr>
+
+                <label>AM/PM
+                    <input type="checkbox" checked="{{ ampm }}" />
+                </label>
+
+                <label>No seconds
+                    <input type="checkbox" checked="{{ nosec }}" />
+                </label>
+
+                <label>No minutes
+                    <input type="checkbox" checked="{{ nomin }}" />
+                </label>
+
+                <hr>
+
+                <div>hour: {{ hour }}</div>
+                <div>minute: {{ minute }}</div>
+                <div>second: {{ second }}</div>
+
+            </template>
+        </polymer-element>
+
+        <spin-time-demo fit></spin-time-demo>
+
+    </body>
+</html>

@@ -1,0 +1,225 @@
+<!--
+@element spin-date
+
+`<spin-date>` is a date selector widget inspired inspired by the date picker in iOS
+
+### Example usage:
+
+    <spin-date year="{{ year }}" month="{{ month }} year="{{ year }}"></spin-date>
+
+### Localization
+
+`<spin-date>` uses [moment.js](http://momentjs.com/) for formatting dates and retrieving month names.
+For documentation on how to do localization with moment.js, check out
+[this link](http://momentjs.com/docs/#/i18n/)
+
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../spin-select/spin-select.html">
+<script src="../moment/moment.js"></script>
+
+<polymer-element name="spin-date">
+
+<template>
+    <style>
+        :host {
+            display: block;
+            perspective: 1000px;
+            text-align: center;
+            min-width: 195px;
+        }
+
+        :host([cont]) {
+            min-width: 160px;
+        }
+
+        spin-select {
+            perspective: none;
+        }
+
+        :host(:not([cont])) spin-select::shadow .option {
+            padding: 0 10px;
+        }
+
+        .days::shadow .option {
+            text-align: right;
+        }
+
+        .months::shadow .option, .years::shadow .option {
+            text-align: left;
+        }
+
+        .days {
+            width: 40px;
+        }
+
+        .months {
+            min-width: 100px;
+            max-width: 150px;
+        }
+
+        .years {
+            width: 55px;
+        }
+    </style>
+
+    <div hidden?="{{ cont }}" layout horizontal center-justified>
+        <spin-select options="{{ days }}" value="{{ day }}" class="days" repeat></spin-select>
+        <spin-select options="{{ months }}" value="{{ month }}" class="months" repeat flex></spin-select>
+        <spin-select id="yearSelect" options="{{ years }}" value="{{ year }}" class="years"></spin-select>
+    </div>
+
+    <div hidden?="{{ !cont }}">
+        <spin-select options="{{ dates }}" id="contSelect"
+            on-select="{{ dateSelected }}"></spin-select>
+    </div>
+
+</template>
+
+<script>
+(function(Polymer, moment) {
+    'use strict';
+
+    function isDef(val) {
+        return typeof val !== 'undefined' && val !== null;
+    }
+
+    Polymer({
+
+        // Localized month names are taken from the `moment.js` library
+        months: moment.months().map(function(month, i) {
+            return {
+                value: i,
+                label: month
+            };
+        }),
+
+        publish: {
+            /**
+             * @attribute day
+             * The selected day. If not specified, defaults to the current day.
+             */
+            day: undefined,
+            /**
+             * @attribute month
+             * The selected month. If not specified, defaults to the current month.
+             * NOTE: This value is 0-based to be consistent with the native `Date` object.
+             * I.e. `0` corresponds to January, `1` corresponds to February and so on.
+             */
+            month: undefined,
+            /**
+             * @attribute year
+             * The selected year. If not specified, defaults to the current year.
+             */
+            year: undefined,
+            /**
+             * @attribute cont
+             * @default false
+             * If set to true, will show a single, continuous wheel instead of three separate wheels for
+             * year, month and day
+             */
+            cont: {
+                value: false,
+                reflect: true
+            },
+            /**
+             * @attribute dateFormat
+             * @default 'LL'
+             * Formatting to be used for displaying dates in 'continuous mode'. Dates are formatted through
+             * the [moment.js](http://momentjs.com/) library. For documentation on formatting options, refer
+             * to http://momentjs.com/docs/#/displaying/format/
+             */
+            dateFormat: 'LL'
+        },
+
+        // Generates options for the year select
+        years: function(i) {
+            var currYear = new Date().getFullYear();
+            return currYear + i;
+        },
+
+        created: function() {
+            this.dates = this.dateOptions.bind(this);
+            var currDate = new Date();
+            var currYear = currDate.getFullYear();
+            this.year = isDef(this.year) ? this.year : currYear;
+            this.month = isDef(this.month) ? this.month : currDate.getMonth();
+            this.day = isDef(this.day) ? this.day : currDate.getDate();
+            this.updateDays();
+        },
+
+        // Updates the day options based on month and year
+        updateDays: function() {
+            var nDays = moment().year(this.year).month(this.month).daysInMonth();
+            var days = [];
+            for (var d = 1; d <= nDays; d++) {
+                days.push(d);
+            }
+            this.day = Math.max(1, Math.min(nDays, this.day));
+            this.days = days;
+        },
+
+        /**
+         * @method getDate
+         * Returns a `Date` object initialized with the selected year, month and day
+         */
+        getDate: function() {
+            return new Date(this.year, this.month, this.day);
+        },
+
+        // Generates options for the continuous date select
+        dateOptions: function(i) {
+            var date = new Date();
+            date.setDate(date.getDate() + i);
+            return {
+                value: date,
+                label: moment(date).format(this.dateFormat)
+            };
+        },
+
+        // Handler for when a date was selected from the continuous date select. Updates the `year`,
+        // `month` and `day` properties
+        dateSelected: function(e, opt) {
+            var d = opt.value;
+            this.year = d.getFullYear();
+            this.month = d.getMonth();
+            this.day = d.getDate();
+        },
+
+        // Updates the scroll index of the contiuous date select based on the `year`, `month` and `day`
+        // properties
+        updateContSelect: function() {
+            // The scroll index is the offset from the current date in days
+            var currDate = new Date();
+            var selectedDate = this.getDate();
+            var diff = selectedDate.getTime() - currDate.getTime();
+            var i = Math.ceil(diff / 24 / 60 / 60 / 1000);
+            this.$.contSelect.selectedIndex = i;
+        },
+
+        // Updates the scroll index of the year select, based on the `year` property
+        updateYearSelect: function() {
+            var currYear = new Date().getFullYear();
+            this.$.yearSelect.selectedIndex = this.year - currYear;
+        },
+
+        yearChanged: function() {
+            this.updateYearSelect();
+            this.updateDays();
+            this.updateContSelect();
+        },
+
+        monthChanged: function() {
+            this.updateDays();
+            this.updateContSelect();
+        },
+
+        dayChanged: function() {
+            this.updateContSelect();
+        }
+
+    });
+})(Polymer, moment);
+</script>
+
+</polymer-element>
