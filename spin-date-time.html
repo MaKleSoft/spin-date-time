@@ -20,11 +20,11 @@
 
         spin-date[cont] /deep/ .option {
             text-align: left;
-            padding: 0 15px;
+            padding: 0 10px;
         }
     </style>
 
-    <spin-date year="{{ year }}" month="{{ month }}" day="{{ day }}"
+    <spin-date id="dateSelect" year="{{ year }}" month="{{ month }}" day="{{ day }}"
         cont="{{ cont }}" dateFormat="{{ dateFormat }}"></spin-date>
     <spin-time hour="{{ hour }}" minute="{{ minute }}" second="{{ second }}"
         ampm="{{ ampm }}" nomin="{{ nomin }}" nosec="{{ nosec }}"></spin-time>
@@ -61,6 +61,14 @@
                 reflect: true
             },
             step: 5
+        },
+
+        getDate: function() {
+            var date = this.$.dateSelect.getDate();
+            date.setHours(this.hour);
+            date.setMinutes(this.minute);
+            date.setSeconds(this.second);
+            return date;
         }
     });
 
